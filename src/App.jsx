@@ -24,7 +24,7 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header className="App-header" style={{ textAlign: 'center' }}  >
                 <h1>Blog Posts</h1>
             </header>
             <main>
