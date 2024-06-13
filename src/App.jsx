@@ -4,23 +4,23 @@ import axios from 'axios';
 
 function App() {
     const [posts, setPosts] = useState([]);
-    const [error, setError] = useState(null);
-
+    const [error] = useState(null);
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-                if (response.status !== 200) {
-                    throw new Error('Error 404');
-                }
-                setPosts(response.data);
-            } catch (error) {
-               return {error : 'Data fetching failed'}
-            }
-        };
-
-        fetchPosts();
-    }, []);
+      const fetchPosts = async () => {
+          try {
+              const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+              if (response.status !== 200) {
+                  throw new Error('Error 404');
+              }
+              setPosts(response.data);
+          } catch (error) {
+              throw new Error('Data fetching failed');
+          }
+      };
+  
+      fetchPosts();
+  }, []);
+  
 
     return (
         <div className="App">
