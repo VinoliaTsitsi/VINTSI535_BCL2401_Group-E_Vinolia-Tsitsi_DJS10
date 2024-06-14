@@ -1,52 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from "react";
+import './index.css';
 
-function App() {
-    const [posts, setPosts] = useState([]);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                // Simulate an error by modifying the API URL
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-                if (response.status !== 200) {
-                    throw new Error('Failed to fetch posts');
-                }
-                setPosts(response.data);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-
-        fetchPosts();
-    }, []);
-
-    return (
-        <div className="App">
-            <header className="App-header" style={{ textAlign: 'center' }}>
-                <h1>Blog Posts</h1>
-            </header>
-            <main>
-                <div style={{ textAlign: 'center' }}>
-                    {error ? (
-                        <p>Error: {error}</p>
-                    ) : (
-                        <ul>
-                            {posts.map(post => (
-                                <li key={post.id}>
-                                    <h3>{post.title}</h3>
-                                    <p>{post.body}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </main>
-        </div>
-    );
+// Separate the fetching logic into its own function
+async function fetchPostsFromAPI() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    if (!res.ok) {
+      throw new Error('Error 404');
+    }
+    return res.json();
+  } catch (err) {
+    // Catch any errors that occur during fetching and return an error message
+    return { error: 'Data fetching failed' };
+  }
 }
 
-export default App;
+export default function BlogPosts() {
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
+
+  // Use useEffect to fetch posts when the component mounts
+  useEffect(() => {
+    fetchPostsFromAPI().then((data) => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setPosts(data);
+      }
+    });
+  }, []);
+
+  // Create a separate function to render the post elements
+  function renderPostElements() {
+    return posts.map((post, index) => (
+      <div className="post" key={post.id}>
+        <h2 className="post-title">{`${index + 1}. ${post.title}`}</h2>
+        <p className="post-body">{post.body}</p>
+      </div>
+    ));
+  }
+
+  return (
+    <>
+      {
+        error 
+        ? <div className="error-message"> {error} </div>
+        : 
+        <div className="posts-container">
+          <h1>Posts</h1>
+          {renderPostElements()}
+        </div>
+      }
+    </>
+  );
+}
 
 
