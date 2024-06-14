@@ -1,6 +1,9 @@
 ## Blog Posts Web Application
 This project is a simple web application that fetches blog posts from an API and displays them on the screen. It is built using React.
 
+## follow this link
+http://localhost:5173/
+
 ## Features
 Fetches blog posts from the JSONPlaceholder API.
 Displays blog post titles and bodies on the screen.
