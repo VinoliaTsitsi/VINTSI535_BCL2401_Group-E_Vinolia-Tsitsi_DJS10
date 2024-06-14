@@ -1,8 +1,14 @@
-# React + Vite
+## Blog Posts Web Application
+This project is a simple web application that fetches blog posts from an API and displays them on the screen. It is built using React.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+Fetches blog posts from the JSONPlaceholder API.
+Displays blog post titles and bodies on the screen.
+Handles errors gracefully in case the API request fails
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+React: A JavaScript library for building user interfaces.
+Axios: A promise-based HTTP client for making API requests.
+JSONPlaceholder: A free online REST API for testing and prototyping.
+Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests to help improve this project.
